@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         boolean resDirectory = new File("./res").mkdirs();
+        System.out.println("Creating products...");
 
         Product product0 = new Product("Milk Milrama 1,5, 1l", 1.27, Category.FOOD);
         //чтобы отслеживать корректно ли время
@@ -20,16 +21,15 @@ public class Main {
         wait(1000);
         Product product4 = new Product("Soccer ball, natural leather", 30.00, Category.SPORT);
 
-        Set<Product> productSet = new HashSet<>(List.of(product0, product1, product2, product3, product4));
-
-        System.out.println(product0);
+        System.out.println("Creating list of products...");
         wait(1000);
+        List<Product> productList = new ArrayList<>(List.of(product0, product1, product2, product3, product4));
 
         product0.setPrise(1.50);
 
-        product4.setPrise();
+        product4.setPrise();//вручную через сканер
 
-        HashMap<String, Double> productMap = getProductMap(productSet);
+        HashMap<String, Double> productMap = getProductMap(productList);
         printProductMap(productMap);
 
 
@@ -40,9 +40,9 @@ public class Main {
             sleep(ms);
         } catch (InterruptedException ignored) {}
     }
-    public static HashMap<String, Double> getProductMap(Set<Product> productSet) {
+    public static HashMap<String, Double> getProductMap(List<Product> productList) {
         HashMap<String, Double> productMap = new HashMap<>();
-        for (Product product: productSet) {
+        for (Product product: productList) {
             productMap.put(product.getName(), product.getPrise());
         }
         return  productMap;
